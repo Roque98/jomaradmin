@@ -1,0 +1,122 @@
+<!-- Modal -->
+<div class="modal fade" #modal tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Crear nuevo producto</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <form [formGroup]="createProductForm">
+          <!-- name -->
+          <label class="form-label">Nombre del producto</label>
+          <div class="input-group mb-3">
+            <input formControlName="name" type="text" class="form-control" placeholder="Escribe un nombre" >
+          </div>
+
+          <!-- image -->
+          <label class="form-label">Imagen del producto</label>
+          <div class="input-group mb-3 justify-content-center">
+            <img class="img-fluid" [src]="getImage()" onerror="this.src='assets/notfound.jpg'">
+          </div>
+          <div class="input-group mb-3">
+            <input formControlName="image" type="text" class="form-control" placeholder="http://urlImagen...." >
+            <span class="input-group-text" (click)="createProductForm.get('image')?.setValue('')">
+              <i class="bi bi-x-lg"></i>
+            </span>
+          </div>
+
+          <!-- providerPrice -->
+          <label class="form-label">Precio proveedor</label>
+          <div class="input-group mb-3">
+            <input formControlName="providerPrice" type="number" class="form-control" placeholder="10" >
+          </div>
+
+          <!-- wholesalePrice -->
+          <label class="form-label">Precio mayoreo</label>
+          <div class="input-group mb-3">
+            <input formControlName="wholesalePrice" type="number" class="form-control" placeholder="12" >
+          </div>
+
+          <!-- final price -->
+          <label class="form-label">Precio menudeo</label>
+          <div class="input-group mb-3">
+            <input formControlName="finalPrice" type="number" class="form-control" placeholder="15" >
+          </div>
+
+
+          <!-- quantity -->
+          <label class="form-label">Stock inicial</label>
+          <div class="input-group mb-3">
+            <input formControlName="quantity" type="number" class="form-control" placeholder="20" >
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer d-flex">
+        <button type="button" class="flex-fill btn btn-secondary" (click)="closeModal()">cancelar</button>
+        <button type="button" class="flex-fill btn btn-success" (click)="createProduct()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container">
+
+  <!-- navbar -->
+  <div class="d-flex align-items-center my-3">
+    <i class="bi bi-arrow-left-circle text-white button-return me-2" [routerLink]="'/categories/' + (getCategory() | async)?.articleId"></i>
+    <h5 class="text-white me-2 text-end">Volver a lista de categorias</h5>
+  </div>
+  
+  <!-- title -->
+  <div class="row">
+    <h4 class="text-white">Categoria: {{ (getCategory() | async)?.name }}</h4>
+  </div>
+
+  <div class="row my-3">
+    <div class="d-flex align-items-center">
+      <h1 class="text-white me-2">Lista de productos</h1>
+      <i class="bi bi-question-circle button-help"></i>
+    </div>
+  </div>
+
+  <!-- search bar -->
+  <div class="row my-3">
+    <div class="col">
+
+      <form action="">
+        <div class="input-group">
+          <input [formControl]="searchInput" type="text" class="form-control" placeholder="buscar...">
+          <span class="input-group-text"><i class="bi bi-x-lg"></i></span>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- create button -->
+  <div class="row my-3">
+    <div class="col-12">
+      <button class="btn btn-success text-white fw-bold w-100 d-flex justify-content-between align-items-center"
+        (click)="openModal()">
+        crear nuevo producto
+        <i class="bi bi-plus"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- products render-->
+  <div class="row my-3">
+    <div class="accordion col-12" id="accordionArticles" *ngIf="getProducts() | async as products">
+      <app-product-options [product]="product" *ngFor="let product of products">
+      </app-product-options>
+    </div>
+  </div>
+
+</div>

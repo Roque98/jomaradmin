@@ -1,0 +1,99 @@
+<!-- Modal -->
+<div class="modal fade" #modal tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Crear nuevo articulo</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <form [formGroup]="createCategoryForm">
+          <!-- name -->
+          <label class="form-label">Nombre de la categoria</label>
+          <div class="input-group mb-3">
+            <input formControlName="name" type="text" class="form-control" placeholder="Escribe un nombre...">
+          </div>
+
+          <!-- image -->
+          <label class="form-label">Url de la imagen</label>
+          <div class="input-group mb-3 justify-content-center">
+            <img class="img-fluid" [src]="getImage()" onerror="this.src='assets/notfound.jpg'">
+          </div>
+          <div class="input-group mb-3">
+            <input formControlName="image" type="text" class="form-control" placeholder="http://dominioImagen">
+            <span class="input-group-text" (click)="createCategoryForm.get('image')?.setValue('')">
+              <i class="bi bi-x-lg"></i>
+            </span>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer d-flex">
+        <button type="button" class="flex-fill btn btn-secondary" (click)="closeModal()">cancelar</button>
+        <button type="button" class="flex-fill btn btn-success" (click)="createCategory()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="container">
+
+  <!-- navbar -->
+  <div class="d-flex align-items-center my-3">
+    <i class="bi bi-arrow-left-circle text-white button-return" [routerLink]="'/articles'"></i>
+    <h5 class="text-white ms-2"> Volver a lista de articulos</h5>
+  </div>
+
+  <!-- title -->
+  <div class="row my-3">
+    <h4 class="text-white ">Articulo: {{(getArticle()|async)?.name}}</h4>
+  </div>
+
+  <div class="row">
+    <div class="d-flex align-items-center">
+      <h1 class="text-white me-2">Lista de categorias</h1>
+      <i class="bi bi-question-circle button-help"></i>
+    </div>
+  </div>
+
+  <!-- search bar -->
+  <div class="row my-3">
+    <div class="col">
+
+      <form action="">
+        <div class="input-group">
+          <input [formControl]="searchInput" type="text" class="form-control" placeholder="buscar...">
+          <span class="input-group-text"><i class="bi bi-x-lg"></i></span>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- create button -->
+  <div class="row my-3">
+    <div class="col-12">
+      <button class="btn btn-success text-white fw-bold w-100 d-flex justify-content-between align-items-center"
+        (click)="openModal()">
+        crear nueva categoria
+        <i class="bi bi-plus"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- categories render-->
+  <div class="row my-3">
+    <div class="accordion col-12" id="accordionArticles">
+      <app-category-options [category]="category" *ngFor="let category of getCategories() | async">
+      </app-category-options>
+      <!-- <p class="text-white text-center" *ngIf="categoriesState.categories.length === 0 && categoriesState.loading">No hay categorias</p> -->
+    </div>
+  </div>
+
+</div>

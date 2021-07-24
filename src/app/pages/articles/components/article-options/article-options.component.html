@@ -1,0 +1,99 @@
+<!-- Modal update -->
+<div class="modal fade" #modal tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Actualizar articulo</h5>
+        <button type="button" class="btn-close" (click)="closeUpdateModal()"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="mb-3">
+          <label for="articleName" class="form-label">Nombre del articulo</label>
+          <input #nameArticleModal [formControl]="nameArticleModalInput" type="text" class="form-control"
+            placeholder="collares, aretes o pulseras" [ngClass]="{'is-invalid': nameArticleModalInput.invalid  && nameArticleModalInput.touched}">
+        </div> 
+
+      </div>
+      <div class="modal-footer d-flex">
+        <button type="button" class="flex-fill btn btn-secondary" (click)="closeUpdateModal()">cancelar</button>
+        <button type="button" class="flex-fill btn btn-primary" (click)="sendUpdateForm()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal confirm-->
+<div class="modal fade" #modalDelete tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Confirma que deseas eliminar "{{ article?.name }}"</h5>
+        <button type="button" class="btn-close" (click)="closeDeleteModal()"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="mb-3">
+          <p>Si eliminas este articulo tambien se eliminar todos las categorias y productos que pertenescan a el</p>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex">
+        <button type="button" class="flex-fill btn btn-secondary" (click)="closeDeleteModal()">cancelar</button>
+        <button type="button" class="flex-fill btn btn-danger" (click)="deletearticle()">eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- contenido -->
+<div class="card mb-2" style="width: 100%">
+  <div class="card-body d-flex justify-content-between align-items-center">
+
+    <h5 class="card-title">{{article?.name}}</h5>
+
+    <div class="dropdown">
+
+      <button class="btn btn-secondary dropdown-toggle" #dropdown data-bs-toggle="dropdown" type="button"
+        (click)="toggleDropdown()">
+        Opciones
+      </button>
+
+      <ul class="dropdown-menu">
+
+        <li>
+          <button class="dropdown-item d-flex justify-content-between" [routerLink]="'/categories/' + article?._id">
+            <div class="option__title">Administrar categorias </div>
+            <i class="bi bi-collection"></i>
+          </button>
+        </li>
+
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+
+        <li>
+          <button (click)="openUpdateModal()" class="dropdown-item d-flex justify-content-between">
+            Editar
+            <i class="bi bi-pencil-square"></i>
+          </button>
+        </li>
+
+        <li>
+          <button (click)="openDeleteModal()" class="dropdown-item d-flex justify-content-between">
+            Eliminar
+            <i class="bi bi-trash"></i>
+          </button>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</div>

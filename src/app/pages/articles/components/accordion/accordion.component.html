@@ -1,0 +1,45 @@
+<div class="accordion-item" *ngIf="article">
+  
+  <h2 class="accordion-header" id="heading{{article.name}}">
+
+    <!-- head -->
+    <button class="accordion-button" type="button" [attr.data-bs-toggle]="'collapse'" [attr.data-bs-target]="'#collapse'+article.name">
+      {{article.name}}
+    </button>
+
+  </h2>
+
+  <div id="collapse{{article.name}}" class="accordion-collapse collapse show"  data-bs-parent="#accordionArticles">
+    <div class="accordion-body">
+
+      <!-- body -->
+      <div class="row">
+        <div class="col mb-2">
+          <button class="btn btn-primary d-flex justify-content-between align-items-center">
+            categorias
+            <i class="bi bi-collection"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col mb-2">
+          <button class="btn btn-warning d-flex justify-content-between align-items-center">
+            editar
+            <i class="bi bi-pencil"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col mb-2">
+          <button class="btn btn-danger d-flex justify-content-between align-items-center">
+            eliminar
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

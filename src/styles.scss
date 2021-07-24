@@ -1,0 +1,70 @@
+/* You can add global styles to this file, and also import other style files */
+
+$spacer: 1rem;
+$font-size-base: 1rem;
+
+// Colors
+// $primary:       #B6702D;
+// $secondary:     #c1c527;
+
+// $info:          #638A7A;
+// $success:       #6c9c46;
+// $warning:       #e98c0e;
+// $danger:        #f44336;
+
+// $light:        #DAD9D5;
+// $dark:          #392723;
+
+// Dropdown
+$dropdown-font-size: $font-size-base * 1.2;
+$dropdown-padding-y: 0;
+$dropdown-item-padding-y: $spacer * 1.2;
+$dropdown-item-padding-x: $spacer;
+
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+
+body {
+  background-color: $dark;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0;
+}
+
+i.bi {
+  font-size: 1.4rem;
+}
+
+.button-help {
+  width: 33px;
+  height: 33px;
+
+  font-size: 4rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 20px;
+  background-color: var(--bs-info);
+
+  color: white;
+}
+
+i.bi.button-return{
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.ng-touched.ng-invalid {
+  @extend .is-invalid;
+}
